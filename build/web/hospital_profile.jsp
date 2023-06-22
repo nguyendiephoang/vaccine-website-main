@@ -4,7 +4,7 @@
     Author     : DELL
 --%>
 
-<%@page import="model.User"%>
+<%@page import="model.Hospital"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -218,7 +218,7 @@
                                                         <div class="tab-content clearfix">
                                                             <div class="tab-pane active" id="1a">
                                                                 <!--form change profile-->
-                                                                <form class="form" action="UserProfileController" method="post"
+                                                                <form class="form" action="HospitalProfileController" method="post"
                                                                       id="infor">
 
                                                                     <%
@@ -236,53 +236,42 @@
                                                                     <div class="form-group">
                                                                         <div class="col-sm-12">
                                                                             <label for="first_name">
-                                                                                <h4>User name</h4>
+                                                                                <h4>Hospital name</h4>
                                                                             </label>
 
                                                                             <%
-                                                                                User username = (User) session.getAttribute("u");
-                                                                                System.out.println("hi: " + username);
+                                                                                Hospital hospital = (Hospital) session.getAttribute("hospital");
+                                                                               
                                                                             %>
 
 
                                                                             <input type="text" class="form-control"
                                                                                    name="name" id="first_name"
-                                                                                   value="<%= username.getUsername()%>" />
+                                                                                   value="<%= hospital.getName()%>" />
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-sm-6">
-                                                                            <label for="last_name">
-                                                                                <h4>Gender</h4>
-                                                                            </label>
-
-                                                                            <select name="gender" class="form-control" id="gender">
-                                                                                <option value="false" <% if ("false".equals(username.isGender())) { %>selected<% } %>>Female</option>
-                                                                                <option value="true" <% if ("true".equals(username.isGender())) { %>selected<% }%>>Male</option>
-                                                                            </select>                                                                                
-                                                                        </div>
-                                                                    </div>
+                                           
                                                                     <div class="form-group">
                                                                         <div class="col-sm-6">
                                                                             <label for="phone">
-                                                                                <h4>Date of birth</h4>
+                                                                                <h4>Address</h4>
                                                                             </label>
-                                                                            <input required name ="dob" type="date" class="form-control" placeholder aria-label="Phone number"
-                                                                                   value="<%= username.getDob()%>">
+                                                                            <input required name ="address" type="text" class="form-control" placeholder aria-label="address"
+                                                                                   value="<%= hospital.getAddress() %>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="col-sm-6">
-                                                                            <label for="mobile">
-                                                                                <h4>Mobile</h4>
+                                                                            <label for="hotline">
+                                                                                <h4>Hotline</h4>
                                                                             </label>
                                                                             <input type="text" class="form-control"
-                                                                                   name="phone" id="mobile"
-                                                                                    pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
-                                                                                    placeholder="Enter phone number" 
-                                                                                    required title="Wrong phone number" 
-                                                                                   value="<%= username.getPhone()%>" />
+                                                                                   name="hotline" id="mobile"                                                                                   
+                                                                                   pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"  
+                                                                                   placeholder="Enter hotline number" 
+                                                                                   required title="Wrong hotline number" 
+                                                                                   value="<%= hospital.getHotline()%>" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -294,49 +283,10 @@
                                                                                    name="email" id="email"
                                                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
                                                                                    title="Wrong format email"
-                                                                                   value="<%= username.getEmail()%>"/>
+                                                                                   value="<%= hospital.getEmail()%>"/>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-sm-6">
-                                                                            <label for="email">
-                                                                                <h4>Identification</h4>
-                                                                            </label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="location" name="identification"
-                                                                                   value="<%= username.getIdentification()%>"/>
-                                                                            <%
-                                                                                String ExistIdentification = (String) request.getSession().getAttribute("ExistIdentification");
-                                                                                if (ExistIdentification != null) {
-                                                                            %>
-                                                                            <div style="color: red"><%= ExistIdentification%></div>
-                                                                            <%
-                                                                                    // Xóa thuộc tính session để tránh hiển thị lại cảnh báo
-                                                                                    request.getSession().removeAttribute("ExistIdentification");
-                                                                                }
-                                                                            %>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-sm-6">
-                                                                            <label for="email">
-                                                                                <h4>Health Insurance</h4>
-                                                                            </label>
-                                                                            <input type="text" class="form-control"
-                                                                                   id="location" name="healthInsurance"
-                                                                                   value="<%= username.getHealthInsurance()%>"/>
-                                                                            <%
-                                                                                String ExistHealthInsurance = (String) request.getSession().getAttribute("ExistHealthInsurance");
-                                                                                if (ExistHealthInsurance != null) {
-                                                                            %>
-                                                                            <div style="color: red"><%= ExistHealthInsurance%></div>
-                                                                            <%
-                                                                                    // Xóa thuộc tính session để tránh hiển thị lại cảnh báo
-                                                                                    request.getSession().removeAttribute("ExistHealthInsurance");
-                                                                                }
-                                                                            %>
-                                                                        </div>
-                                                                    </div>
+                                                                    
 
                                                                     <div class="form-group">
                                                                         <div class="col-sm-12">

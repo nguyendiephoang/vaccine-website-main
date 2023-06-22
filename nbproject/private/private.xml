@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DU_AN/vaccine-website-main/web/newHome1.jsp</file>
-            <file>file:/D:/DU_AN/vaccine-website-main/src/java/controller/authController/updatePassController.java</file>
-            <file>file:/D:/DU_AN/vaccine-website-main/web/newHome.jsp</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/src/java/controller/HospitalProfileController.java</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/src/java/controller/UserProfileController.java</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/src/java/dal/HospitalDAO.java</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/src/java/controller/authController/loginController.java</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/web/hospital.jsp</file>
             <file>file:/D:/DU_AN/vaccine-website-main/web/user_profile.jsp</file>
-            <file>file:/D:/DU_AN/vaccine-website-main/web/register.jsp</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/web/login.jsp</file>
+            <file>file:/D:/DU_AN/vaccine-website-main/web/hospital_profile.jsp</file>
         </group>
     </open-files>
 </project-private>

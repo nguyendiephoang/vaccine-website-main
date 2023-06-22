@@ -19,7 +19,7 @@ public class logoutController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().setAttribute("idUser", null);
+        request.getSession().setAttribute("id", null);
         request.getSession().setAttribute("role", null);
         response.sendRedirect("login.jsp");
     }

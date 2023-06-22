@@ -127,7 +127,7 @@
                                                         <i class="fas fa-user dropdown-icon"></i> Hello 
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="user-dropdown">
-                                                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a>
+                                                        <a class="dropdown-item" href="HospitalProfileController"><i class="fas fa-user"></i> Profile</a>
                                                         <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a>
                                                         <a class="dropdown-item" href="logoutController"><i class="fas fa-sign-out-alt"></i> Logout</a>
                                                     </div>

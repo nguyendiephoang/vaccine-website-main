@@ -2,6 +2,7 @@ package controller.authController;
 
 
 import dal.Encrypt;
+import dal.HospitalDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Hospital;
 import model.User;
 
 
@@ -67,14 +69,18 @@ public class updatePassController extends HttpServlet {
             String oldPass = request.getParameter("oldPass");
             String newPass = request.getParameter("newPass");
             String reNewPass = request.getParameter("reNewPass");
-            HttpSession session = request.getSession();
-            UserDAO db = new UserDAO();
+            HttpSession session = request.getSession();       
+            
                 Encrypt en = new Encrypt();
 
             int id = (int) session.getAttribute("id");
-            User currentUser = db.findUserById(id);
+            int role = (int) session.getAttribute("role");
+                      
             
-            if(currentUser.getPassword().equals(en.encryptCCCDTo(oldPass)) && newPass.equals(reNewPass)){
+            if(role == 1){
+                 UserDAO db = new UserDAO();
+                User currentUser = db.findUserById(id);
+                if(currentUser.getPassword().equals(en.encryptCCCDTo(oldPass)) && newPass.equals(reNewPass)){
                 db.updateUser(newPass,currentUser.getEmail());
                 request.getSession().setAttribute("changpasssucess","Password was change succesfully");
             }
@@ -89,6 +95,26 @@ public class updatePassController extends HttpServlet {
                 
             }
             response.sendRedirect("user_profile.jsp#changepass");
+            }
+            else if(role == 3){
+                HospitalDAO hb = new HospitalDAO();
+                Hospital currentHos = hb.findHospitalById(id);
+                if(currentHos.getPassword().equals(en.encryptCCCDTo(oldPass)) && newPass.equals(reNewPass)){
+                hb.updateHospital(newPass,currentHos.getEmail());
+                request.getSession().setAttribute("changpasssucess","Password was change succesfully");
+            }
+            else{
+                if(!newPass.equals(reNewPass)){
+                    request.getSession().setAttribute("conflictPass", "New pass differ repass");
+                }
+                if(!currentHos.getPassword().equals(en.encryptCCCDTo(oldPass))){
+                    request.getSession().setAttribute("oldPassU","Password wrong");
+                }               
+                
+            }
+            response.sendRedirect("hospital_profile.jsp#changepass");
+                
+            }
         } catch (Exception ex) {
             Logger.getLogger(updatePassController.class.getName()).log(Level.SEVERE, null, ex);
         }

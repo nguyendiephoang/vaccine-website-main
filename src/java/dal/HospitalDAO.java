@@ -87,24 +87,7 @@ public class HospitalDAO {
 
     }
 
-      public List<User> getAllUser() {
-        List<User> list = new ArrayList<>();
-        String sql = "select * from [user]";
-
-        try {
-            conn = new DBContext().getConnect();// mo ket noi voi sql
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5),
-                        rs.getBoolean(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10));
-//				System.out.println(u);
-                list.add(u);
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+     
        public List<Hospital> getAllHospital() {
         List<Hospital> list = new ArrayList<>();
         String query = "select * from hospital";
@@ -238,6 +221,33 @@ public class HospitalDAO {
         }
         return null;
     }
+    
+    public Hospital findHospitalByHotline(String hotline) {
+        try {
+            Encrypt en = new Encrypt();
+            String sql = "select * from [hospital] where [hotline] = ?";
+            conn = new DBContext().getConnect();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, hotline);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Hospital s = new Hospital();
+                s.setIdBV(rs.getInt("idH"));
+                s.setName(rs.getString("name"));
+                s.setAddress(rs.getString("address"));
+                s.setEmail(rs.getString("email"));
+                s.setHotline(rs.getString("hotline"));
+                s.setUsername(rs.getString("username"));
+                s.setPassword(rs.getString("password"));
+                return s;
+            }
+        } catch (Exception e) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+
+    }
+    
 
     public Hospital findHospital(String email) {
         try {
@@ -246,6 +256,33 @@ public class HospitalDAO {
             conn = new DBContext().getConnect();
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, email);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Hospital s = new Hospital();
+                s.setIdBV(rs.getInt("idH"));
+                s.setName(rs.getString("name"));
+                s.setAddress(rs.getString("address"));
+                s.setEmail(rs.getString("email"));
+                s.setHotline(rs.getString("hotline"));
+                s.setUsername(rs.getString("username"));
+                s.setPassword(rs.getString("password"));
+                return s;
+            }
+        } catch (Exception e) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+
+    }
+    
+    
+    public Hospital findHospitalById(int id) {
+        try {
+            Encrypt en = new Encrypt();
+            String sql = "select * from [hospital] where [idH] = ?";
+            conn = new DBContext().getConnect();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Hospital s = new Hospital();

@@ -279,6 +279,9 @@
                                                                             </label>
                                                                             <input type="text" class="form-control"
                                                                                    name="phone" id="mobile"
+                                                                                    pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
+                                                                                    placeholder="Enter phone number" 
+                                                                                    required title="Wrong phone number" 
                                                                                    value="<%= username.getPhone()%>" />
                                                                         </div>
                                                                     </div>
@@ -289,6 +292,8 @@
                                                                             </label>
                                                                             <input type="email" class="form-control"
                                                                                    name="email" id="email"
+                                                                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                                                                                   title="Wrong format email"
                                                                                    value="<%= username.getEmail()%>"/>
                                                                         </div>
                                                                     </div>
